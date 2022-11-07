@@ -6,7 +6,7 @@
 /*   By: mtravez <mtravez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 18:41:59 by mtravez           #+#    #+#             */
-/*   Updated: 2022/11/07 15:02:52 by mtravez          ###   ########.fr       */
+/*   Updated: 2022/11/07 17:18:30 by mtravez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,6 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 	ft_memcpy(sub, &s[start], len);
 	sub[len] = '\0';
 	return (sub);
-}
-
-//This function duplicates a string into a new memory bank and returns
-//its pointer
-char	*ft_strdup(const char *s1)
-{
-	char	*cpy;
-	size_t	strsize;
-
-	strsize = ft_strlen(s1) + 1;
-	cpy = malloc(strsize);
-	if (!cpy)
-		return (NULL);
-	ft_memcpy(cpy, s1, strsize);
-	return (cpy);
 }
 
 //This function returns the size of the given string
