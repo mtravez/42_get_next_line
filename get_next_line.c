@@ -6,14 +6,15 @@
 /*   By: mtravez <mtravez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 18:25:26 by mtravez           #+#    #+#             */
-/*   Updated: 2022/11/07 17:19:18 by mtravez          ###   ########.fr       */
+/*   Updated: 2022/11/07 18:50:50 by mtravez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <fcntl.h> 
-#include <stdio.h>
 
+/*This function checks if the given string contains a new line character.
+	@param file the string to be checked for new line
+*/
 static int	has_new_line(char *file)
 {
 	int	i;
@@ -28,6 +29,10 @@ static int	has_new_line(char *file)
 	return (0);
 }
 
+/*This function frees the given string, asigns the string to null
+and returns NULL
+@param file the address to the string to be freed
+*/
 static void	*free_null(char	**file)
 {
 	free(*file);
@@ -35,6 +40,15 @@ static void	*free_null(char	**file)
 	return (NULL);
 }
 
+/*This function creates a new string according to the content of
+file. This means, that if file does not have any new line characters, 
+it will return a new string that duplicates the file.
+If the file does have a new line character, it will return a substring
+of file up until the new line and rewrite file so its contents are only 
+whatever it was after the new line.
+@param file the string to get the line from
+@param newfile the address to file (please don't question, it doesn't 
+work otherwise)*/
 static char	*get_line(char *file, char **newfile)
 {
 	int		i;
@@ -64,6 +78,10 @@ static char	*get_line(char *file, char **newfile)
 	return (temp);
 }
 
+/*This function reads the file from fd in a loop and 
+rewrites and returns the line up until file has a new line
+@param file the address to the static string
+@param fd the file descriptor for the file*/
 static char	*loop_read(char **file, int fd)
 {
 	char	*line;
@@ -87,6 +105,10 @@ static char	*loop_read(char **file, int fd)
 	return (line);
 }
 
+/*This function reads a line from the file descriptor fd.
+Repeated calls to this function will allow you to read the
+file one line at a time
+@param fd the file descriptor*/
 char	*get_next_line(int fd)
 {
 	static char	*file = NULL;

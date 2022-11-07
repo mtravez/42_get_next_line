@@ -6,12 +6,11 @@
 /*   By: mtravez <mtravez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 18:41:59 by mtravez           #+#    #+#             */
-/*   Updated: 2022/11/07 17:18:30 by mtravez          ###   ########.fr       */
+/*   Updated: 2022/11/07 18:22:17 by mtravez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 //This function creates a new string from the string s from the index start
 //and then returns the pointer
