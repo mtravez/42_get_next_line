@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtravez <mtravez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/06 18:25:26 by mtravez           #+#    #+#             */
-/*   Updated: 2022/11/08 14:49:00 by mtravez          ###   ########.fr       */
+/*   Created: 2022/11/08 12:34:55 by mtravez           #+#    #+#             */
+/*   Updated: 2022/11/08 14:53:08 by mtravez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 /*This function checks if the given string contains a new line character.
 	@param file the string to be checked for new line
@@ -111,22 +111,22 @@ file one line at a time
 @param fd the file descriptor*/
 char	*get_next_line(int fd)
 {
-	static char	*file = NULL;
+	static char	*filelist[1024];
 	int			size;
 	char		*line;
 
-	if (file == NULL)
+	if (filelist[fd] == NULL)
 	{
-		file = malloc(BUFFER_SIZE + 1);
-		if (!file)
+		filelist[fd] = malloc(BUFFER_SIZE + 1);
+		if (!filelist[fd])
 			return (NULL);
-		size = read(fd, file, BUFFER_SIZE);
+		size = read(fd, filelist[fd], BUFFER_SIZE);
 		if (size <= 0)
-			return (free_null(&file));
-		file[size] = 0;
+			return (free_null(&filelist[fd]));
+		filelist[fd][size] = 0;
 	}
-	line = loop_read(&file, fd);
-	if (has_new_line(file))
-		line = ft_strjoin(line, get_line(file, &file));
+	line = loop_read(&filelist[fd], fd);
+	if (has_new_line(filelist[fd]))
+		line = ft_strjoin(line, get_line(filelist[fd], &filelist[fd]));
 	return (line);
 }
